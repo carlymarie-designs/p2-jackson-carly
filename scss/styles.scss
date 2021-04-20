@@ -1,0 +1,287 @@
+@import 'grid';
+
+@mixin flex-me() {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+body {
+	font-family: 'Exo 2', sans-serif;
+}
+
+// vars
+$ggw: 30px;
+$pink: #ec207b;
+
+header.hero-front {
+	@include flex-me();
+	position: relative;
+	background-color: #181818;
+	color: #fff;
+	height: 80vh;
+	background-size: cover;
+	background-position: center center;
+	z-index: 10;
+
+	&:before {
+		position: absolute;
+		content: '';
+		background-color: fade-out(#000, .2);
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		z-index: -5;
+	}
+
+	nav {
+		background-color: transparent;
+		padding: $ggw 0;
+		position: absolute;
+		right: 0;
+		left: 0;
+		top: 0;
+		ul {
+			@include flex-me;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+			li > a {
+				margin: 0 $ggw / 2;
+				text-decoration: none;
+				color: #fff;
+				text-transform: uppercase;
+
+				&:hover {
+					color: #ccc;
+				}
+			}
+
+			@media (max-width: 768px) {
+				display: none;
+			}
+		}
+
+		@media (max-width: 768px) {
+			padding: 10px 0;
+			background-color: transparent;
+		}
+	}
+
+	.content {
+		text-align: center;
+
+		.col-8 {
+			margin: auto;
+		}
+	}
+
+	h1 {
+		margin: 0;
+		padding: 0;
+	}
+
+	@media (max-width: 992px) {
+		height: 55vh;
+	}
+}
+
+.d-none {
+	display: none !important;
+}
+
+.img-fluid {
+	max-width: 100%;
+	height: auto;
+}
+
+.blurb {
+	text-align: center;
+	background-color: fade-out(#ccc, .5);
+	padding: 70px 0;
+
+	h2 {
+		margin-bottom: 5px;
+	}
+
+	p {
+		margin: 0;
+	}
+}
+
+#output {
+	margin: $ggw 0;
+}
+
+.two-col {
+	margin: 20px 0;
+
+	img {
+		margin: 0 auto;
+		display: block;
+	}
+}
+
+footer {
+	background-color: #000;
+	color: #fff;
+	p {
+		text-align: center;
+		font-size: 12px;
+		color: #fff;
+	}
+}
+
+.accordion {
+	background-color: #181818;
+	padding: 70px 0;
+	color: #fff;
+	h5 {
+		text-align: center;
+	}
+	.accordion-toggle {
+		display: block;
+	}
+
+	.accordion-content {
+		display: none;
+		margin-top: 10px;
+		font-size: rem(12px);
+		line-height: rem(16px);
+	}
+
+	.accordion-content.active {
+		display: block;
+	}
+
+	.col-8 {
+		background-color: fade-out(#fff, .95);
+		margin: 10px;
+		border-radius: 5px;
+		padding: 30px 50px;
+
+		a {
+			text-decoration: none;
+			font-weight: bold;
+			color: #fff;
+			font-size: 20px;
+		}
+	}
+}
+
+// Hamburger button
+.hamburger-btn {
+	@media (max-width: 768px) {
+		align-items: center;
+		cursor: pointer;
+		flex-direction: column;
+		height: 50px;
+		justify-content: center;
+		margin-left: $ggw;
+		position: relative;
+		width: 50px;
+		display: flex;
+
+		span {
+			background: #fff;
+			display: block;
+			height: 2px;
+			margin: 2px 0;
+			width: 20px;
+		}
+	}
+}
+
+// Navigation drawer
+#nav-drawer {
+	background: $pink;
+	box-shadow: 0 0 0 0 fade-out(black, 0);
+	height: 100vh;
+	overflow-x: hidden;
+	padding: $ggw * 1.5;
+	position: fixed;
+	right: 0;
+	top: 0;
+	transform: translateX(100%);
+	transition: all 0.7s cubic-bezier(0.64, 0.045, 0.35, 1);
+	width: 550px;
+	z-index: 999;
+
+	// Expand drawer width to 100% for mobile
+	@media (max-width: 768px) {
+		width: 90%;
+	}
+
+	.nav-drawer-header {
+		height: 50px;
+		margin-bottom: $ggw * 1.5;
+		position: relative;
+
+		// Close button in navigation drawer
+		label {
+			display: block;
+			margin: 0;
+		}
+
+		.close {
+			align-items: center;
+			color: #fff !important;
+			cursor: pointer;
+			display: flex;
+			font-size: 22px;
+			height: 100%;
+			justify-content: center;
+			position: relative;
+			right: 10px;
+			transition: all 0.4s cubic-bezier(0.405, 0.07, 0.575, 0.995);
+			width: 50px;
+
+			&:hover {
+				color: lighten($pink, 25%);
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+	// Primary navigation
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		> li {
+			a {
+				color: #fff;
+				display: block;
+				font-size: 16px;
+				font-weight: bold;
+				line-height: 1em;
+				padding: 10px 0;
+
+				span {
+					position: relative;
+
+					.material-icons {
+						color: #ccc;
+						font-size: 18px;
+						position: absolute;
+						right: -19px;
+						top: 1px;
+					}
+				}
+			}
+		}
+	}
+
+	// Navigation drawer active state - slide out
+	#drawer-toggle:checked ~ & {
+		box-shadow: 0 0 40px 10px fade-out(black, 0.75);
+		transform: translateX(0);
+	}
+
+	.material-icons {
+		color: #ccc;
+	}
+}
