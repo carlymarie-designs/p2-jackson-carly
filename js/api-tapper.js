@@ -1,5 +1,10 @@
-function tapApi() {
 
+
+const btn = document.querySelector('#reveal');
+// reveal data on click
+btn.addEventListener( "click", tapApi );
+
+function tapApi() {
   // vars
   const xhr = new XMLHttpRequest();
   const url = 'https://restcountries.eu/rest/v2/all';
@@ -32,8 +37,8 @@ function tapApi() {
   xhr.open('GET', url);
   xhr.send();
   // console.log(xhr);
-  
+
+  btn.style.cssText += 'display: none';
 }
 
-// call api tapper
-tapApi();
+  
